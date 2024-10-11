@@ -37,9 +37,20 @@ async function createDatabaseAndTable() {
       )
     `);
 
-    console.log("Banco de dados e tabela criados com sucesso!");
+     // Criação da tabela de usuários
+     await conn.query(`
+      CREATE TABLE IF NOT EXISTS users (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          username VARCHAR(255) NOT NULL,
+          email VARCHAR(255) NOT NULL UNIQUE,
+          password VARCHAR(255) NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+  `);
+
+    console.log("Banco de dados e tabela de usuários criados com sucesso!");
   } catch (err) {
-    console.error("Erro ao criar banco de dados e tabela:", err);
+    console.error("Erro ao criar banco de dados e tabela de usuários:", err);
   } finally {
     if (conn) conn.end(); // Fecha a conexão
   }
