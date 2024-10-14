@@ -4,11 +4,21 @@ const User = {
     // CREATE - Cadastro de usuário
     create: async (user) => {
         const { username, email, password } = user;
+
+        // Verificar se o e-mail já existe
+        const existingUser = await User.getByEmail(email);
+        if (existingUser) {
+            throw new Error("Email já cadastrado");
+        }
+
+        // Inserir o novo usuário
         const result = await pool.query(
             `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`,
             [username, email, password]
         );
-        return result;
+
+        // Retornar o novo usuário com o ID convertido para número
+        return { id: Number(result.insertId), username, email };
     },
 
     // READ - Buscar usuário por email (para login)

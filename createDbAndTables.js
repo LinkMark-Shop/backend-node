@@ -21,7 +21,7 @@ async function createDatabaseAndTable() {
     await conn.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`);
 
     // Selecionar o banco de dados
-    await conn.query("USE ecommerce_db");
+    await conn.query("USE linkmark");
 
     // Criação da tabela de produtos
     await conn.query(`

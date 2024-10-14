@@ -14,14 +14,14 @@ app.use(
 );
 
 const productRoutes = require("./routes/productRoutes");
-// const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes"); //adicionado
 // const authorRoutes = require("./routes/authorRoutes");
 
 app.use(express.json());
 
 // Rotas
 app.use("/api/products", productRoutes);
-// app.use("/api/users", userRoutes);
+ app.use("/api/users", userRoutes);
 // app.use("/api/authors", authorRoutes);
 
 // Iniciar servidor
